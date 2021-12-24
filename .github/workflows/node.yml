@@ -43,7 +43,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.MYTOKEN }}
-        file: release.zip
+        file: dist/release.zip
         tag: ${{ steps.date.outputs.time  }}
         overwrite: true
         file_glob: true
