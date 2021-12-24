@@ -21,7 +21,28 @@ jobs:
       run: |
         pnpm install
         pnpm build
-        ls -l
+    - name: Archive Release
+      uses: thedoctor0/zip-release@master
+      with:
+        type: 'zip'
+        directory: dist
+        filename: 'release.zip'
+
+    - name: Get current date
+      id: date
+      uses: Kaven-Universe/github-action-current-date-time@v1.1.0
+      with:
+        format: "YYYYMMDDHHmmss"
+        
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.MYTOKEN }}
+        file: build/ios/ipa/*.ipa
+        tag: ${{ steps.date.outputs.time  }}
+        overwrite: true
+        file_glob: true
+        
 #     - name: Deploy
 #       uses: crazy-max/ghaction-github-pages@v2
 #       with:
