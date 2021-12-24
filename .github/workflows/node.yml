@@ -31,6 +31,7 @@ jobs:
     - name: list files
       run: |
         ls -l
+        ls dist -l
         
     - name: Get current date
       id: date
