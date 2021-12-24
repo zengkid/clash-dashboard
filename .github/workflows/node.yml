@@ -27,7 +27,11 @@ jobs:
         type: 'zip'
         directory: dist
         filename: 'release.zip'
-
+        
+    - name: list files
+      run: |
+        ls -l
+        
     - name: Get current date
       id: date
       uses: Kaven-Universe/github-action-current-date-time@v1.1.0
@@ -38,7 +42,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.MYTOKEN }}
-        file: build/ios/ipa/*.ipa
+        file: release.zip
         tag: ${{ steps.date.outputs.time  }}
         overwrite: true
         file_glob: true
